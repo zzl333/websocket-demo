@@ -11,30 +11,30 @@
 
     var websocket = null;
     if ('WebSocket' in window) {
-        websocket = new WebSocket('ws://www.coco-z.com:9000/webSocket');
+        index = new WebSocket('ws://www.coco-z.com:9000/webSocket');
     } else {
         alert('该浏览器不支持websocket');
     }
-    websocket.onopen = function (ev) {
+    index.onopen = function (ev) {
         console.log('建立连接');
     };
-    websocket.onclose = function (ev) {
+    index.onclose = function (ev) {
         console.log('连接关闭');
     };
-    websocket.onmessage = function (ev) {
+    index.onmessage = function (ev) {
         console.log('收到消息：' + ev.data);
         $('#msgdiv').append('<h3 style="color: #0c141f;">' + ev.data + '</h3>');
         // alert('收到消息：' + ev.data);
     };
     window.onbeforeunload = function (ev) {
-        websocket.close();
+        index.close();
     };
 
     function sendMsg() {
         var msgNode = document.getElementById("msg");
         var msg = msgNode.value;
         if (msg) {
-            websocket.send(msg);
+            index.send(msg);
         }
         msgNode.value = '';
     }
@@ -42,7 +42,7 @@
     function setName() {
         var nameNode = document.getElementById("name");
         var name = nameNode.value;
-        websocket.send(name + "::");
+        index.send(name + "::");
         nameNode.value = '';
     }
 </script>

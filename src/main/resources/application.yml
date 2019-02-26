@@ -1,2 +1,6 @@
 server:
   port: 9000
+spring:
+  thymeleaf:
+    mode: LEGACYHTML5
+    cache: false
