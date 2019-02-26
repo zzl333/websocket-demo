@@ -11,32 +11,28 @@
 
     var websocket = null;
     if ('WebSocket' in window) {
-        index = new WebSocket('ws://www.coco-z.com:9000/webSocket');
+        websocket = new WebSocket('ws://www.coco-z.com:9000/webSocket');
     } else {
-        alert('该浏览器不支持websocket');
+        alert('浏览器不支持websocket');
     }
-    index.onopen = function (ev) {
+    websocket.onopen = function (ev) {
         console.log('建立连接');
     };
-    index.onclose = function (ev) {
+    websocket.onclose = function (ev) {
         console.log('连接关闭');
     };
-    index.onmessage = function (ev) {
+    websocket.onmessage = function (ev) {
         console.log('收到消息：' + ev.data);
-        var date = new Date();
-        date = date.Format("yyyy年MM月dd hh:mm:ss");
-        $('#msgdiv').prepend('<h3 style="color: #0c141f;margin: -8px 0px -2px -11px">' + ev.data + '</h3>');
-        $('#msgdiv').prepend('<p style="font-size: 12px;color: #596363;">' + date + '</p>')
     };
     window.onbeforeunload = function (ev) {
-        index.close();
+        websocket.close();
     };
 
     function sendMsg() {
         var msgNode = document.getElementById("msg");
         var msg = msgNode.value;
         if (msg) {
-            index.send(msg);
+            websocket.send(msg);
         }
         msgNode.value = '';
     }
@@ -44,7 +40,7 @@
     function setName() {
         var nameNode = document.getElementById("name");
         var name = nameNode.value;
-        index.send(name + "::");
+        websocket.send(name + "::");
         nameNode.value = '';
     }
     $(function (e) {
