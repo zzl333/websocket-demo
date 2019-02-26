@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.coco.demo</groupId>
     <artifactId>socket-demo</artifactId>
-    <version>1.0-RELEASE</version>
+    <version>1.0</version>
     <packaging>jar</packaging>
     <name>socket-demo</name>
     <description>websocket-demo</description>
