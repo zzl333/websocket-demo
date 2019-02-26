@@ -4,8 +4,11 @@
     <title>websocket</title>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/angular.js/1.4.6/angular.min.js"></script>
 </head>
 <script type="text/javascript">
+
     var websocket = null;
     if ('WebSocket' in window) {
         websocket = new WebSocket('ws://www.coco-z.com:9000/webSocket');
@@ -20,22 +23,37 @@
     };
     websocket.onmessage = function (ev) {
         console.log('收到消息：' + ev.data);
-        alert('收到消息：' + ev.data);
+        $('#msgdiv').append('<h3 style="color: aquamarine;">' + ev.data + '</h3>');
+        // alert('收到消息：' + ev.data);
     };
     window.onbeforeunload = function (ev) {
         websocket.close();
+    };
+
+    function sendMsg() {
+        var msgNode = document.getElementById("msg");
+        var msg = msgNode.value;
+        if (msg) {
+            websocket.send(msg);
+        }
+        msgNode.value = '';
     }
 
-    function sendMsg(msg) {
-        var msg = document.getElementById("msg");
-        websocket.send(msg.value);
+    function setName() {
+        var nameNode = document.getElementById("name");
+        var name = nameNode.value;
+        websocket.send(name + "::");
+        nameNode.value = '';
     }
 </script>
 <body>
-<h1>hello websocket</h1>
-<button onclick="sendMsg()">sendmsg</button>
-<input type="text" id="msg" name="msg" />
+<h1>简单的聊天</h1>
+<button onclick="setName()">设置昵称</button>
+<input type="text" id="name" name="name" />
 <hr />
-
+<button onclick="sendMsg()">发送消息</button>
+<textarea type="text" id="msg" name="msg"></textarea>
+<hr />
+<div ng-app="" id="msgdiv"></div>
 </body>
 </html>

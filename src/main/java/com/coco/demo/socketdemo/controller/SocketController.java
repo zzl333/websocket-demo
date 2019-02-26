@@ -22,7 +22,7 @@ public class SocketController {
 
     @RequestMapping("send")
     public String send(String msg) {
-        webSocket.sendMessage("msg:{" + msg + "}");
+        webSocket.sendMessage(msg);
         return "消息发送成功！消息：{" + msg + "}";
     }
 
