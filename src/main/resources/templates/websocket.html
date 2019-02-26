@@ -2,11 +2,13 @@
 <html>
 <head>
     <title>websocket</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 <script type="text/javascript">
     var websocket = null;
     if ('WebSocket' in window) {
-        websocket = new WebSocket('ws://localhost:8080/webSocket');
+        websocket = new WebSocket('ws://localhost:9000/webSocket');
     } else {
         alert('该浏览器不支持websocket');
     }
@@ -23,8 +25,17 @@
     window.onbeforeunload = function (ev) {
         websocket.close();
     }
+
+    function sendMsg(msg) {
+        var msg = document.getElementById("msg");
+        websocket.send(msg.value);
+    }
 </script>
 <body>
 <h1>hello websocket</h1>
+<button onclick="sendMsg()">sendmsg</button>
+<input type="text" id="msg" name="msg" />
+<hr />
+
 </body>
 </html>
