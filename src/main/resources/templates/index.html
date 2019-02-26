@@ -47,6 +47,13 @@
         index.send(name + "::");
         nameNode.value = '';
     }
+    $(function (e) {
+        $('#msg').keydown(function (event) {
+            if (event.keyCode == 13) {
+                sendMsg();
+            }
+        });
+    });
 </script>
 <body>
 <h1>简单的聊天</h1>
