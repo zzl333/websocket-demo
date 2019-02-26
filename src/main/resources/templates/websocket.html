@@ -23,7 +23,7 @@
     };
     websocket.onmessage = function (ev) {
         console.log('收到消息：' + ev.data);
-        $('#msgdiv').append('<h3 style="color: aquamarine;">' + ev.data + '</h3>');
+        $('#msgdiv').append('<h3 style="color: #0c141f;">' + ev.data + '</h3>');
         // alert('收到消息：' + ev.data);
     };
     window.onbeforeunload = function (ev) {

@@ -33,10 +33,12 @@ public class WebSocket {
         setname(null);
         webSocketSet.add(this);
         log.error("【websocket消息】 有新的连接，总数：{}", webSocketSet.size());
+        sendMessage(namesMap.get(session.getId()) + "来了~ 共：" + webSocketSet.size() + " 人在聊天");
     }
 
     @OnClose
     public void onClose() {
+        sendMessage(namesMap.get(session.getId()) + "跑路了~ 共：" + (webSocketSet.size() - 1) + " 人在聊天");
         webSocketSet.remove(this);
         namesMap.remove(session.getId());
         log.error("【websocket消息】 连接断开，总数：{}", webSocketSet.size());
