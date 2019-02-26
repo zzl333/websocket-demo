@@ -23,8 +23,10 @@
     };
     index.onmessage = function (ev) {
         console.log('收到消息：' + ev.data);
-        $('#msgdiv').append('<h3 style="color: #0c141f;">' + ev.data + '</h3>');
-        // alert('收到消息：' + ev.data);
+        var date = new Date();
+        date = date.Format("yyyy年MM月dd hh:mm:ss");
+        $('#msgdiv').prepend('<h3 style="color: #0c141f;margin: -8px 0px -2px -11px">' + ev.data + '</h3>');
+        $('#msgdiv').prepend('<p style="font-size: 12px;color: #596363;">' + date + '</p>')
     };
     window.onbeforeunload = function (ev) {
         index.close();
@@ -56,4 +58,21 @@
 <hr />
 <div ng-app="" id="msgdiv"></div>
 </body>
+<script>
+    Date.prototype.Format = function (fmt) { //author: meizz
+        var o = {
+            "M+": this.getMonth() + 1, //月份
+            "d+": this.getDate(), //日
+            "h+": this.getHours(), //小时
+            "m+": this.getMinutes(), //分
+            "s+": this.getSeconds(), //秒
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+            "S": this.getMilliseconds() //毫秒
+        };
+        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+            if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    }
+</script>
 </html>
