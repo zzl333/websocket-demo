@@ -11,7 +11,8 @@
 
     var websocket = null;
     if ('WebSocket' in window) {
-        websocket = new WebSocket('ws://www.coco-z.com:9000/webSocket');
+        websocket = new WebSocket('ws://47.119.118.239:80/webSocket');
+        // websocket = new WebSocket('ws://localhost:80/webSocket');
     } else {
         alert('该浏览器不支持websocket');
     }
